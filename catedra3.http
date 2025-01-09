@@ -1,0 +1,6 @@
+@catedra3_HostAddress = http://localhost:5028
+
+GET {{catedra3_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
