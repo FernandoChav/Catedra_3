@@ -58,7 +58,7 @@ namespace catedra3.src.Controllers
             var token = _jwtService.GenerateJwtToken(loginRequest.Email);
 
             // Retornar el token generado
-            return Ok(new { token });
+            return Ok(new { token, email = user.Email });
         }
 
         [HttpPost("register")]

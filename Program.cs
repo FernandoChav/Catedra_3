@@ -18,6 +18,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
@@ -83,6 +92,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();  // Habilitar autenticación con JWT
 app.UseAuthorization(); 
-
+app.UseCors("AllowAll");
 app.MapControllers();
 app.Run();
